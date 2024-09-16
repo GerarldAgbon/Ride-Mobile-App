@@ -1,12 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, Pressable } from 'react-native';
-import logo from '../assets/new-logo-white.png'; 
+import { Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, } from 'react-native';
+import logo from '../assets/new-logo-teal.png'; 
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import { useState } from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function Dashboard({ navigation }) {
   
@@ -20,107 +19,67 @@ export default function Dashboard({ navigation }) {
   if (!fonts)
     return null;
 
-  const [date, setDate] = useState(new Date())
-  const [picker, setPicker] = useState(false)
-  const [dashdate, setDashdate] = useState('')
-
-
-  const bgmain =require('../assets/bgmain.png')
-
-  const toggleDate = () => {
-    setPicker(!picker);
-  };
-
-  const dateChange = ({type}, selectDate) =>{
-    if (type == "set") {
-        const currentDate = selectDate;
-        setDate(currentDate);
-        
-        if (Platform.OS ==="android"){
-            toggleDate();
-            setDashDate(currentDate.toDateString());
-        }
-
-    } else {
-        toggleDate();
-    }
-  }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] =useState('');
 
   return (
         <SafeAreaView className="flex-1">
         <ScrollView className="bg-white" contentContainerStyle={{paddingBottom:10}} showsVerticalScrollIndicator={false}>
        <KeyboardAvoidingView className="flex-1" behavior={Platform.OS === 'ios' ? 'padding' : null}>
-            <ImageBackground source={bgmain} className="h-[700px]">
-            <View className="flex-1 flex-col relative items-center justify-center">
-                <View className="flex-1 flex-col mr-60 mt-10 relative items-center justify center">
-                    <View className="flex flex-row relative items-start justify-start">
-                        <Image source={logo} className="w-[50px] h-[63px]"></Image>
-                        <View className="flex flex-col">
-                            <Text style={{fontFamily:'MontSemiBold'}} className="text-white mt-5 ml-2">
-                                R I D E
-                            </Text>
-                            <Text style={{fontFamily:'MontLight'}} className="text-white ml-2 text-[5px]">
-                                Passenger Mobile Booking App
-                            </Text>
-                        </View>
-                    </View>
-                    <View className="flex flex-col absolute shadow-xl drop-shadow-2xl shadow-gray-900 rounded-xl justify-center items-center bg-white w-[270px] h-[250px] left-20 top-24">
-                        {/* <Text style={{fontFamily:"MontReg"}} className="flex mr-32 mb-1">
-                            Location
-                        </Text> */}
-                        <TextInput className="border-gray-500 border bg-white w-[200px] h-[40px] rounded-xl pl-5 mb-5 shadow-xl drop-shadow-xl shadow-gray-900"
-                            placeholder='Location'                        
-                        />
-                        {/* <Text style={{fontFamily:"MontReg"}} className="flex mr-32 mb-1">
-                            Location
-                        </Text> */}
-                        <TextInput className="border-gray-500 border bg-white w-[200px] h-[40px] rounded-xl pl-5 mb-5 shadow-xl drop-shadow-xl shadow-gray-900" 
-                            placeholder='Destination'
-                        />
-                        {/* <Text style={{fontFamily:"MontReg"}} className="flex mr-32 mb-1">
-                            Location
-                        </Text> */}
-                        {!picker && (
-                        <Pressable onPress={toggleDate}>
-                            <TextInput className="border-gray-500 border bg-white w-[200px] h-[40px] rounded-xl pl-5 shadow-xl drop-shadow-xl shadow-gray-900"
-                                placeholder='Select Date'
-                                value={dashdate}
-                                onChange={setDashdate}
-                                editable={false}
-                            />
-                        </Pressable>
-                        )}
-                        {picker && (
-                        <DateTimePicker 
-                            mode="date"
-                            display="spinner"
-                            value={date}
-                            onChange={dateChange}
-                        />
-                        )}
-                        <TouchableOpacity className="bg-[#03314B] rounded-2xl mt-4 h-10 w-32 items-center justify-center">
-                            <Text style={{fontFamily:'MontReg'}} className="text-white">
-                                Search Buses
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View className="flex-1 flex-col justify-center items-center mt-20 relative">
-                        <Text style={{fontFamily:'MontSemiBold'}} className="text-[#03314B] text-lg">
-                            Popular Routes
-                        </Text>
-                        <View className="flex flex-row justify-center items-center relative left-10">
-                            <TouchableOpacity className="bg-slate-600 w-[200px] h-[50px] mt-4 rounded-xl items-center justify-center">
-                            <Text>
-                                Camp Phillips
-                            </Text>
-                            </TouchableOpacity>
-                        </View>
+            <View className="flex-1 flex-col bg-[#ffffff] items-center justify-center mt-8">
+                <View className="flex flex-col mr-[330px]">
+                <Icon.Button name="arrow-back" backgroundColor="white" color="#03314B" size={30} className="items-start" onPress={() => navigation.navigate('Splashscreen')}></Icon.Button>
+                </View>
+                <View className="flex flex-col relative items-center justify-center">
+                <Image source={logo} className="w-[100px] h-[130px] opacity-50 mb-2"></Image>
+                <View className="flex flex-col mb-[160px] items-center justify-center">
+                    <Text style={{ fontFamily: 'MontBold'}}className="text-[#03314B] text-[40px] pl-4">LET'S SIGN</Text>
+                    <Text style={{ fontFamily: 'MontBold'}}className="text-[#03314B] text-[40px] pl-4">YOU IN</Text>
+                    <View className="flex felx-col mt-12 items-center">
+                    <Text style={{ fontFamily: 'MontReg'}}className="text-[#03314B] text-m absolute bottom-1">Enter your </Text>
+                    <Text style={{ fontFamily: 'MontReg'}}className="text-[#03314B] text-m absolute top">Username and Password</Text>
                     </View>
                 </View>
-            <StatusBar style="light" />
-            </View>
+                </View>
+                <View className="flex flex-col relative items-center"> 
+                <TextInput className="border-1 w-[300px] h-[50px] pl-3 rounded-xl bg-[#e6ebed] text-[#03314B] items-center justify-center absolute bottom-[120px]" 
+                    placeholder='Enter Email'
+                    value={email}
+                    onChangeText={text => setEmail(text)}
+                />
+                <TextInput className="border-1 w-[300px] h-[50px] pl-3 rounded-xl bg-[#e6ebed] text-[#03314B] items-center justify-center absolute bottom-[50px]" 
+                    placeholder='Enter Password'
+                    secureTextEntry
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                />
+                <View className="flex flex-row justify-center items-center">
+                  <Text className="mr-3 text-xs"style={{ fontFamily: 'MontSemiBold'}}>
+                    Sign in with:
+                  </Text>
+                  <FontIcon.Button name='facebook' className="bg-[#3b5998]"
+                  onPress={() => navigation.navigate('Splashscreen')}
+                  > Facebook</FontIcon.Button>
 
-            </ImageBackground>
+                  <View className="mr-2"></View>
+                  <FontIcon.Button name='google' className="bg-[#0F9D58]"
+                  onPress={() => navigation.navigate('Splashscreen')}
+                  > Google</FontIcon.Button>
+                </View>
+                  <View className="flex flex-col relative justify-center items-center">
+                    <TouchableOpacity className="border-1 w-[200px] h-[50px] rounded-xl bg-[#03314B] opacity-95 text-white items-center justify-center absolute top-5"
+                    onPress={() => navigation.navigate('Dashboard')}>
+                        <Text style={{ fontFamily: 'MontBold'}} className="text-white text-xl">LOG IN</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View className="flex relative mt-20 justify-center items-center">
+                  <Text className="text-[10px]">
+                    By logging in, you agree to our Terms of Service and Privacy Policy.
+                  </Text>
+                </View>
+                <StatusBar style="dark" />
+            </View>
       </KeyboardAvoidingView>
       </ScrollView>
       </SafeAreaView>
